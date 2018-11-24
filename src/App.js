@@ -16,7 +16,6 @@ class App extends Component {
     super(props)
 
     this.state = {
-      lettersChosen: [],
       snowmanNumber: 0,
       randomWord: wordlist[Math.floor(Math.random() * wordlist.length)]
         .toUpperCase()
@@ -45,10 +44,13 @@ class App extends Component {
       })
       this.correctLetters.push(event.target.value)
     }
-    console.log(this.chosenLetters)
     if (this.correctLetters.length === this.state.randomWord.length) {
       this.winStatement()
     }
+  }
+
+  resetGame = event => {
+    document.location.reload(true)
   }
 
   displayNextSnowman = () => {
@@ -65,13 +67,6 @@ class App extends Component {
 
     return <img src={snowmen[this.state.snowmanNumber]} alt="Snowman" />
   }
-
-  // isLetterChosen = letter => {
-  //   if (this.chosenLetters.includes(letter)) {
-  //     return true
-  //   }
-  //   return false
-  // }
 
   render() {
     return (
@@ -176,7 +171,7 @@ class App extends Component {
         </div>
         <div className={this.state.hidden ? 'hidden' : 'new-game'}>
           <p>You Win!</p>
-          <button>New Game</button>
+          <button onClick={this.resetGame}>New Game</button>
         </div>
       </div>
     )
