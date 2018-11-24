@@ -17,24 +17,38 @@ class App extends Component {
 
     this.state = {
       lettersChosen: [],
-      buttonValue: true,
-      snowmanNumber: 0
+      snowmanNumber: 0,
+      randomWord: wordlist[Math.floor(Math.random() * wordlist.length)]
+        .toUpperCase()
+        .split(''),
+      hidden: true,
+      noDisplay: false
     }
   }
-  chooseRandomWord = () => {
-    let randomWord = wordlist[Math.floor(Math.random() * wordlist.length)]
-    let randomWordArray = randomWord.split('')
-    console.log(randomWord)
-    console.log(randomWordArray)
-    return randomWordArray
+
+  chosenLetters = []
+  correctLetters = []
+
+  winStatement = () => {
+    this.setState({
+      hidden: false,
+      noDisplay: true
+    })
   }
 
   _click = event => {
-    this.setState({
-      buttonValue: false,
-      snowmanNumber: this.state.snowmanNumber + 1
-    })
-    console.log(this.state.snowmanNumber)
+    this.chosenLetters.push(event.target.value)
+    event.target.style.visibility = 'hidden'
+    if (this.state.randomWord.includes(event.target.value)) {
+      this.setState({
+        snowmanNumber: this.state.snowmanNumber + 1
+      })
+      this.correctLetters.push(event.target.value)
+    }
+    console.log(this.chosenLetters)
+    if (this.correctLetters.length === this.state.randomWord.length) {
+      this.winStatement()
+    }
   }
 
   displayNextSnowman = () => {
@@ -49,72 +63,120 @@ class App extends Component {
       step_7
     ]
 
-    return <img src={snowmen[this.state.snowmanNumber]} />
+    return <img src={snowmen[this.state.snowmanNumber]} alt="Snowman" />
   }
 
-  isLetterChosen = letter => {
-    // How will I tell if this letter is already chosen?
-    return false
-  }
+  // isLetterChosen = letter => {
+  //   if (this.chosenLetters.includes(letter)) {
+  //     return true
+  //   }
+  //   return false
+  // }
 
   render() {
     return (
       <div>
         <div className="img-shell">{this.displayNextSnowman()}</div>
         <p>
-          {this.chooseRandomWord().map(letter => {
-            return <span>{letter} </span>
+          {this.state.randomWord.map(letter => {
+            return (
+              <>
+                <span>
+                  {this.chosenLetters.includes(letter) ? letter : '_ '}
+                </span>
+              </>
+            )
           })}
         </p>
-        <div className="buttons">
+        <div className={this.state.noDisplay ? 'no-display' : 'buttons'}>
           <div className="first-row">
-            <button onClick={this._click} disabled={this.isLetterChosen('A')}>
+            <button value="A" onClick={this._click}>
               A
             </button>
-            <button onClick={this._click} disabled={!this.state.buttonValue}>
+            <button value="B" onClick={this._click}>
               B
             </button>
-            <button onClick={this._click} disabled={!this.state.buttonValue}>
+            <button value="C" onClick={this._click}>
               C
             </button>
-            <button onClick={this._click} disabled={!this.state.buttonValue}>
+            <button value="D" onClick={this._click}>
               D
             </button>
-            <button onClick={this._click} disabled={!this.state.buttonValue}>
+            <button value="E" onClick={this._click}>
               E
             </button>
-            <button onClick={this._click} disabled={!this.state.buttonValue}>
+            <button value="F" onClick={this._click}>
               F
             </button>
-            <button onClick={this._click} disabled={!this.state.buttonValue}>
+            <button value="G" onClick={this._click}>
               G
             </button>
-            <button onClick={this._click} disabled={!this.state.buttonValue}>
+            <button value="H" onClick={this._click}>
               H
             </button>
           </div>
           <div className="second-row">
-            <button>I</button>
-            <button>J</button>
-            <button>K</button>
-            <button>L</button>
-            <button>M</button>
-            <button>N</button>
-            <button>O</button>
-            <button>P</button>
-            <button>Q</button>
+            <button value="I" onClick={this._click}>
+              I
+            </button>
+            <button value="J" onClick={this._click}>
+              J
+            </button>
+            <button value="K" onClick={this._click}>
+              K
+            </button>
+            <button value="L" onClick={this._click}>
+              L
+            </button>
+            <button value="M" onClick={this._click}>
+              M
+            </button>
+            <button value="N" onClick={this._click}>
+              N
+            </button>
+            <button value="O" onClick={this._click}>
+              O
+            </button>
+            <button value="P" onClick={this._click}>
+              P
+            </button>
+            <button value="Q" onClick={this._click}>
+              Q
+            </button>
           </div>
           <div className="third-row">
-            <button>R</button>
-            <button>S</button>
-            <button>T</button>
-            <button>U</button>
-            <button>V</button>
-            <button>W</button>
-            <button>X</button>
-            <button>Y</button>
-            <button>Z</button>
+            <button value="R" onClick={this._click}>
+              R
+            </button>
+            <button value="S" onClick={this._click}>
+              S
+            </button>
+            <button value="T" onClick={this._click}>
+              T
+            </button>
+            <button value="U" onClick={this._click}>
+              U
+            </button>
+            <button value="V" onClick={this._click}>
+              V
+            </button>
+            <button value="W" onClick={this._click}>
+              W
+            </button>
+            <button value="X" onClick={this._click}>
+              X
+            </button>
+            <button value="Y" onClick={this._click}>
+              Y
+            </button>
+            <button value="Z" onClick={this._click}>
+              Z
+            </button>
           </div>
+        </div>
+        <div className={this.state.hidden ? 'hidden' : 'new-game'}>
+          <p>You Win!</p>
+          <button>New Game</button>
         </div>
       </div>
     )
