@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import { decorate, computed, observable } from 'mobx'
+import { observer } from 'mobx-react'
+
+import game from './Game'
 
 class Letter extends Component {
   render() {
     return (
-      <button value={this.props.letter} onClick={this.props._click}>
+      <button value={this.props.letter} onClick={game._click}>
         {this.props.letter}
       </button>
     )
   }
 }
 
-export default Letter
+export default observer(Letter)

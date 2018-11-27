@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
+import { decorate, computed, observable } from 'mobx'
+import { observer } from 'mobx-react'
+
+import game from './Game'
 
 class Blanks extends Component {
   render() {
     return (
       <p>
-        {this.props.randomWord.map(letter => {
+        {game.randomWord.map(letter => {
           return (
             <>
               <span className="blank">
-                {this.props.chosenLetters.includes(letter) ? letter : '_ '}
+                {game.chosenLetters.includes(letter) ? letter : '_ '}
               </span>
             </>
           )
@@ -18,4 +22,4 @@ class Blanks extends Component {
   }
 }
 
-export default Blanks
+export default observer(Blanks)

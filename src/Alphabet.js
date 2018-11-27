@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import { decorate, computed, observable } from 'mobx'
+import { observer } from 'mobx-react'
+
+import game from './Game'
 import Letter from './Letter'
 
 class Alphabet extends Component {
@@ -36,12 +40,7 @@ class Alphabet extends Component {
         {this.alphabet.map(letter => {
           return (
             <li>
-              <Letter
-                _click={this.props._click}
-                letter={letter}
-                chosenLetters={this.props.chosenLetters}
-                correctLetters={this.props.correctLetters}
-              />
+              <Letter letter={letter} />
             </li>
           )
         })}
@@ -50,4 +49,4 @@ class Alphabet extends Component {
   }
 }
 
-export default Alphabet
+export default observer(Alphabet)

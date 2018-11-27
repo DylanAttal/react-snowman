@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import { decorate, computed, observable } from 'mobx'
+import { observer } from 'mobx-react'
+
+import game from './Game'
 
 import step_0 from './step_0.png'
 import step_1 from './step_1.png'
@@ -22,11 +26,11 @@ class SnowmanPics extends Component {
       step_7
     ]
 
-    return <img src={snowmen[this.props.snowmanNumber]} alt="Snowman" />
+    return <img src={snowmen[game.snowmanNumber]} alt="Snowman" />
   }
   render() {
     return <div>{this.displayNextSnowman()}</div>
   }
 }
 
-export default SnowmanPics
+export default observer(SnowmanPics)
