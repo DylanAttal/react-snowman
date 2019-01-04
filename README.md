@@ -1,44 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-Snowman
 
-## Available Scripts
+<p align="center">
+<img src="src/snowman.gif">
+</p>
 
-In the project directory, you can run:
+### See it live
 
-### `npm start`
+https://react-snowman-dylanattal.surge.sh/
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Summary
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The goal of this project was to create a game of reverse hangman. I was given a list of random words in JSON format and used `Math.floor()` and `Math.random()` to choose a random word for each new game. I then mapped each letter of the word to a blank. I pushed each correct letter to an array, and I was able to determine when the user won the game by comparing the length of the correct letters array with the length of the random word chosen.
 
-### `npm test`
+I used MobX for state management in this project. The `Game` component contains the entire state for the app, and the other components reference it. A state management library was really useful in this project since I split up the app into several components: `App`, `SnowmanPics`, `Blanks`, `Alphabet`, and `Letter`. Having each component reference the `Game` component was a much easier solution than passing down state through each component.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Project Goals
 
-### `npm run build`
+- [x] Create an app where the user plays a game of reverse hangman
+- [x] Choose a random word from a given list in JSON format
+- [x] Display blanks that correspond to the letters in the word
+- [x] Display correct letters once chosen
+- [x] Display a new part of the snowman for each correct letter chosen
+- [x] Make buttons disappear once clicked upon
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Technologies Used
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+HTML, CSS, Javascript, React, MobX
